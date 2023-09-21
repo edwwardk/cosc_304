@@ -26,9 +26,10 @@ values (1,'AC35','2022-09-14 07:00:00','1A'),
 
 update OnFlight set seatNumber = '2B' Where passID = 1 AND flightNumber = 'AC35';
 
-update Flight set DATE_ADD(expectedDepartDateTime,1) where departAirport ='YLW';
+update Flight set actualDepartDateTime = DATE_ADD(actualDepartDateTime, INTERVAL 1 HOUR) where departAirport ='YLW';
 
 delete from Airport where AirportID = 'YLW';
 
-delete from OnFlight where PassID = 1;
+delete from OnFlight where PassID = 1 and flightNumber = 'WJ111' ;
 
+delete from Passenger, OnFlight where PassID = 2
