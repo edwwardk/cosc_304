@@ -1,20 +1,20 @@
 version: '3.8'
-services:             
+services:
     cosc304-mysql:
         image: mysql:8.0
         container_name: cosc304-mysql
         restart: always
         environment:
-            MYSQL_DATABASE: 'testuser'
-            MYSQL_USER: 'testuser'
-            MYSQL_PASSWORD: '304testpw'            
-            MYSQL_ROOT_PASSWORD: '304rootpw'
+            MYSQL_DATABASE: 'cosc304-mysql'
+            MYSQL_USER: 'edward'
+            MYSQL_PASSWORD: 'password'
+            MYSQL_ROOT_PASSWORD: 'rootpassword'
         ports:
             - '3306:3306'
         expose:
-            - '3306'   
+            - '3306'
         volumes:
             - mysql-db:/var/lib/mysql
             - ./ddl:/docker-entrypoint-initdb.d
-volumes:     
+volumes:
     mysql-db:
