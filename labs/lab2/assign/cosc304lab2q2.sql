@@ -32,4 +32,6 @@ delete from Airport where AirportID = 'YLW';
 
 delete from OnFlight where PassID = 1 and flightNumber = 'WJ111' ;
 
-delete from Passenger, OnFlight where PassID = 2
+delete from OnFlight where passID = 2;
+delete from Passenger where passID = 2 ;
+
