@@ -15,7 +15,7 @@ CREATE TABLE Airport (
 	airportID CHAR(5),
 	airportName VARCHAR(30),
 	airportCity VARCHAR(40),
-	airportProvine VARCHAR(20),
+	airportProvince VARCHAR(20),
 	airportCountry VARCHAR(20),
 	PRIMARY KEY (airportID)
 );
