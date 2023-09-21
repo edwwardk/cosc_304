@@ -22,13 +22,15 @@ CREATE TABLE Airport (
 
 CREATE TABLE Flight (
 	flightNumber CHAR(5),
-	departDate DATETIME,
 	departAirport CHAR(5),
 	arriveAirport CHAR(5),
-	expectedArriveDateTime DATETIME,
-	actualArriveDateTime DATETIME,
 	planeID VARCHAR(10),
-	PRIMARY KEY (flightNumber, departDate),
+	expectedDepartDateTime DATETIME,
+	expectedArriveDateTime DATETIME,
+	actualDepartDateTime DATETIME,
+	actualArriveDateTime DATETIME,
+	
+	PRIMARY KEY (flightNumber, expectedDepartDateTime),
 	FOREIGN KEY (planeId) REFERENCES Airplane(planeID)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE
@@ -49,13 +51,13 @@ CREATE TABLE Passenger (
 CREATE TABLE OnFlight (
 	passID INTEGER,
 	flightNumber CHAR(5),
-	departDate DATETIME,
+	expectedDepartDateTime DATETIME,
 	seatNumber CHAR(4),
 	PRIMARY KEY (seatNumber),
 	FOREIGN KEY (passID) REFERENCES Passenger(passID)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE,
-	FOREIGN KEY (flightNumber, departDate) REFERENCES Flight()
+	FOREIGN KEY (flightNumber, expectedDepartDateTime) REFERENCES Flight(flightNumber, expectedDepartDateTime)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE
 );
