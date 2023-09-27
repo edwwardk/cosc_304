@@ -33,6 +33,12 @@ CREATE TABLE Flight (
 	PRIMARY KEY (flightNumber, expectedDepartDateTime),
 	FOREIGN KEY (planeId) REFERENCES Airplane(planeID)
 		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	FOREIGN KEY (departAirport) REFERENCES Airport(airportID)
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	FOREIGN KEY (arriveAirport) REFERENCES Airport(airportID)
+		ON DELETE SET NULL
 		ON UPDATE CASCADE
 );
 
@@ -53,7 +59,7 @@ CREATE TABLE OnFlight (
 	flightNumber CHAR(5),
 	expectedDepartDateTime DATETIME,
 	seatNumber CHAR(4),
-	PRIMARY KEY (seatNumber),
+	PRIMARY KEY (passID, flightNumber, expectedDepartDateTime),
 	FOREIGN KEY (passID) REFERENCES Passenger(passID)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE,
