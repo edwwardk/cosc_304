@@ -31,7 +31,7 @@ PrairieLearn online system (Connect with your CWL): https://plcanary.ok.ubc.ca/
 **Official Calendar:** Databases from a user's perspective: querying with SQL, designing with UML, and using programs to analyze data. Construction of database-driven applications and websites and experience with current database technologies.  Completion of COSC 121 is recommended.
 **Prerequisite:** One of COSC 111, COSC 123, COSC 210. Third-year standing.
 
-**Specific description:** This course provides an introduction to database systems including database querying, design, and programming. The course consists of three major components. The first component explains databases from a user perspective including how to query using SQL and relational algebra. The second component involves designing relational databases using Entity-Relationship (ER) diagrams and UML. The last component involves experential learning on real-world use cases of databases for software development and data analytics. Technologies used include Java, JDBC, JSP, Python, and PHP. Students completing the course have experience with current database technologies, and the ability to use databases, analyze the contained data, and develop programs to automate data analysis and presentation.
+**Specific description:** This course provides an introduction to database systems including database querying, design, and programming. The course consists of three major components. The first component explains databases from a user perspective including how to query using SQL and relational algebra. The second component involves designing relational databases using Entity-Relationship (ER) diagrams and UML. The last component involves experiential learning on real-world use cases of databases for software development and data analytics. Technologies used include Java, JDBC, JSP, Python, and PHP. Students completing the course have experience with current database technologies, and the ability to use databases, analyze the contained data, and develop programs to automate data analysis and presentation.
 
 ## Course Objectives
 **Course Format:** Interactive classes consist of topic introduction, understanding evaluation using quick questions, and concept mastery with larger exercises.  Practical skills and applications of topics are covered in assignments as well as practice using industrial database systems and software.
@@ -45,7 +45,7 @@ PrairieLearn online system (Connect with your CWL): https://plcanary.ok.ubc.ca/
  - Perform data analysis, reporting, and visualization using data extracted from databases.
  - Use JSON and XML for data exchange and representation.
  - Execute and deploy databases on a computer using virtualization/containerization technology such as Docker.
- - Implement database security using user accounts/passwords and managing SQL privileges using GRANT and REVOKE.
+ - Implement database security using user accounts/passwords and SQL privileges using GRANT and REVOKE.
 
 ## Marking and Evaluation
 | Item | Weighting | Description |
@@ -89,11 +89,12 @@ PrairieLearn online system (Connect with your CWL): https://plcanary.ok.ubc.ca/
 | Oct. 10 (T) | **Midterm Exam #1 In-Class** | |
 | Oct. 12 (TH) | [Database Programming using Java/JDBC](topics/12_db_programming) | [Sample Java Code](topics/12_db_programming/code), [JDBC Tutorial](https://docs.oracle.com/javase/tutorial/jdbc/index.html)  |
 | Oct. 17 (T) | [Database Programming using Python and R](topics/13_db_python_programming) | [Sample Python Code](topics/13_db_python_programming/code), [SQL Server and pyodbc](https://docs.microsoft.com/en-us/sql/connect/python/pyodbc/python-sql-driver-pyodbc), [pyodbc](https://github.com/mkleehammer/pyodbc/wiki)<br> [pyodbc Getting Started](https://github.com/mkleehammer/pyodbc/wiki/Getting-started), [Python Database API](https://www.python.org/dev/peps/pep-0249), [Python sqlite3](https://docs.python.org/3/library/sqlite3.html)  |
-| Oct. 19 (TH) | [Database Web Programming – Web servers, JSP/PHP](topics/14_web_programming)| [Sample JSP/PHP Code](topics/14_web_programming/code)<br> [Comic - Why validation is important](https://xkcd.com/327/) |
-| Oct. 24 (T) | [Advanced SQL DDL – Triggers](topics/15_triggers)<br> [Advanced SQL DDL – Views](topics/16_views) | [SQL for Web Nerds: SQL Triggers](https://philip.greenspun.com/sql/triggers.html) |
-| Oct. 26 (TH) | [Advanced SQL – Security](topics/17_security)<br>[Advanced SQL – Transactions, Recursion](topics/18_transactions) | [MySQL Recursive Query](https://www.mysqltutorial.org/mysql-recursive-cte/) |
-| Nov. 2 (T) | **Midterm Exam #2 In-Class** | |
-| Nov. 7 (TH) | [XML and XPath](topics/19_xml) |  [Sample XML Code](topics/19_xml/code), [Intro to XML/XML Reference](https://www.w3schools.com/xml/xml_whatis.asp)<br>[XMLSchema Reference](https://www.w3schools.com/xml/schema_intro.asp)<br>[XML Validator](https://www.freeformatter.com/xml-validator-xsd.html), [Test XPath](https://cosc304.ok.ubc.ca/rlawrenc/tomcat/xml/xmlquery.html) |
+| Oct. 19 (TH) | Assignment and database programming practice class |
+| Oct. 24 (T) | [Database Web Programming – Web servers, JSP/PHP](topics/14_web_programming)| [Sample JSP/PHP Code](topics/14_web_programming/code)<br> [Comic - Why validation is important](https://xkcd.com/327/) |
+| Oct. 26 (TH) | [Advanced SQL DDL – Triggers](topics/15_triggers)<br> [Advanced SQL DDL – Views](topics/16_views) | [SQL for Web Nerds: SQL Triggers](https://philip.greenspun.com/sql/triggers.html) |
+| Oct. 31 (T) | [Advanced SQL – Security](topics/17_security)<br>[Advanced SQL – Transactions, Recursion](topics/18_transactions) | [MySQL Recursive Query](https://www.mysqltutorial.org/mysql-recursive-cte/) |
+| Nov. 2 (TH) | **Midterm Exam #2 In-Class** | |
+| Nov. 7 (T) | [XML and XPath](topics/19_xml) |  [Sample XML Code](topics/19_xml/code), [Intro to XML/XML Reference](https://www.w3schools.com/xml/xml_whatis.asp)<br>[XMLSchema Reference](https://www.w3schools.com/xml/schema_intro.asp)<br>[XML Validator](https://www.freeformatter.com/xml-validator-xsd.html), [Test XPath](https://cosc304.ok.ubc.ca/rlawrenc/tomcat/xml/xmlquery.html) |
 | Nov. 9 (TH) | Project Work Class |  |
 | Nov. 14 (T) | **No class for Term 1 midterm break** | |
 | Nov. 16 (TH) | **No class for Term 1 midterm break** | |
@@ -103,7 +104,7 @@ PrairieLearn online system (Connect with your CWL): https://plcanary.ok.ubc.ca/
 | Nov. 30 (TH) | [Data warehousing and Data Mining](topics/24_data_warehousing)<br>[304 Course Summary and Preview of COSC 404](topics/25_course_summary) | [10 Rules for Data Storage](https://people.ok.ubc.ca/rlawrenc/teaching/304/Notes/refs/rulesfordatastorage.pdf) |
 | Dec. 5 (T) | Project completion | |
 | Dec. 7 (TH) | **Final Exam Review** | |
-<!-- | Dec. 14 (W) | **Final Exam at 7:00PM in COM 201.<br>Cumulative, 2.5 hours, requires a laptop.** | -->
+| Dec. 16 (W) | **Final Exam at 8:30 AM in COM 201.<br>Cumulative, 2.5 hours, requires a laptop.** |
 
 ## Labs
 
