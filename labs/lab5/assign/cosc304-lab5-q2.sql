@@ -1,19 +1,4 @@
-# cosc 304 lab 5 question 1 relational model
-# Q1
-
-Owner (id {PK}, firstName, lastName, address)
-Pet (name {PK}, *ownerId*, age, description)
-    // ownerId is a FK to Owner
-    Cat ()
-    Dog ()
-PetStay (startDate {PK}, *petName* {PK}, *ownerId* {PK}, endDate, cost)
-    // petName is a FK to Pet, ownerId is a FK to Owner
-Room (roomNumber {PK}, *buildingId* {PK}, buildingName, yearBuilt)
-    // buildingId is a FK to Building
-Building (buildingId {PK}, buildingName, yearBuilt)
-
-
-#Q2
+drop database if exists onlinestore;
 
 create database if not exists onlinestore;
 
@@ -31,80 +16,90 @@ drop table if exists Category;
 drop table if exists Product;
 drop table if exists ProductInventory;
 
-CREATE TABLE PaymentMethod(
-paymentMethodid int not null,
+create table PaymentMethod(
+paymentMethodid int not null auto_increment,
 paymentType varchar(20),
 paymentnumber int,
 paymentExpiryDate date,
-primary key (paymentMethodid)) ENGINE = Innodb
+primary key (paymentMethodid)
+) ENGINE = Innodb;
 
 create table Customer(
-customerid int not null,
-firstName varchar (20),
-lastName varchar (20),
+customerid int not null auto_increment,
+firstName varchar(20),
+lastName varchar(20),
 email varchar(50),
 phoneNum varchar(20),
 address varchar (50), 
 city varchar(20),
 state varchar(20),
-postalcode varchar (6),
+postalcode varchar(6),
 country varchar(20),
 userid varchar(50),
 password varchar(50),
-primary key (customerid))
+primary key (customerid)
+);
 
 
 create table OrderSummary(
-orderid int not null,
+orderid int not null auto_increment,
 orderDate datetime,
 totalAmount float,
 shipToAddress varchar(50),
 shipToCity varchar(20),
 shipToState varchar(20),
 shipToCountry varchar(20),
-shipToPostalCode varchar(6)
-primary key (orderid))
+shipToPostalCode varchar(6),
+primary key (orderid)
+);
 
 create table Shipment(
-shipmentid int not null, 
+shipmentid int not null auto_increment,
 shipmentDate date,
 shipmentDesc varchar(400),
-primary key (shipmentid))
+primary key (shipmentid)
+);
 
 create table Review(
-reviewid int,
+reviewid int auto_increment,
 reviewRating int,
 reviewComment varchar(400),
 reviewDate datetime, 
-primary key (reviewid)) 
+primary key (reviewid)
+);
 
 create table InCart(
 inCartQuantity int,
-inCartPrice float)
+inCartPrice float
+);
 
 create table OrderProduct(
 orderProductQuantity int,
-orderProductPrice float)
+orderProductPrice float
+);
 
 create table Warehouse(
-warehouseid int,
+warehouseid int auto_increment,
 warehouseName varchar(50),
-primary key (warehouseid))
+primary key (warehouseid)
+);
 
 create table Category(
-categoryid int,
+categoryid int auto_increment,
 categoryName varchar(50),
-primary key (categoryid))
+primary key (categoryid)
+);
 
 create table Product(
-productid int,
+productid int auto_increment,
 productName varchar(50),
 productPrice float,
 productImageURL varchar(50),
 productImage blob, 
-productDesc varchar(400)
-primary key (productid))
+productDesc varchar(400),
+primary key (productid)
+);
 
 create table ProductInventory(
 inventoryQuantity int 
-)
+);
