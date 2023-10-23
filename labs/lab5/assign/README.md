@@ -21,20 +21,20 @@ The project will build an online store like Amazon.com selling whatever products
 
 - A <strong>Customer</strong> is identified by an auto-increment id. Other attributes include first name, last name, email, phone number, street address, city, province/state, postal code, and country. A <strong>Customer</strong> also has a user id (unique) and password.
 
-- A customer may have one or more payment methods. A <strong>Payment Method</strong> has an auto-increment id for a key, a payment method type (PayPal, Visa, etc.), payment number, and payment expiry date.
+- A customer may have some payment methods. A <strong>Payment Method</strong> has an auto-increment id for a key, a payment method type (PayPal, Visa, etc.), payment number, and payment expiry date.
 
 - An <strong>Order</strong> is placed by one customer. A customer may have multiple orders. An <strong>Order</strong> has an auto-increment id, order date, and total order amount (e.g. $55.75). Also store the shipment address, city, state, country, and postal code. Use <strong>OrderSummary</strong> as entity/table name as <strong>Order</strong> is a keyword in SQL.
 
 - The store sells products. A <strong>Product</strong> has an auto-increment id, name, price, image URL (string), image (BLOB), and description.
 - A product has a category. A category has one or more Products. A <strong>Category</strong> has an auto-increment id and name.
 
-- Products are part of an order. An order may have one or more products. For each product in an order track the quantity and price.
+- Products are part of an order. An order may have multiple products. For each product in an order track the quantity and price.
 
 - An order is shipped with a shipment. A <strong>Shipment</strong> has an auto-increment id, a shipment date, and a description. A shipment contains only one order.
 
 - A <strong>Warehouse</strong> contains products. A product may be stored at multiple warehouses with different inventory values. A shipment will be sent from only one warehouse. A <strong>Warehouse</strong> has an auto-increment id and a name.
 
-- For each customer, track their shopping cart which will contain one or more products each with a quantity and price.
+- For each customer, track their shopping cart which may contain products each with a quantity and price.
 
 - A product may have reviews by customers. A <strong>Review</strong> by a customer on a product has an auto-increment id, rating (1 to 5), comment, and review date. A customer does not have to buy a product in order to provide a review. A customer may review a product more than once.
 
@@ -42,7 +42,7 @@ The project will build an online store like Amazon.com selling whatever products
 
 **1. Draw the ER/UML diagram for this database. Note: Data types are REQUIRED as part of the design. (21 marks)** **You can use PrairieLearn to check your work (link: https://plcanary.ok.ubc.ca/pl/course_instance/2/assessment/44), but your design needs to include data types so it must be in Astah or another tool.**
 
-**2. Convert the UML diagram into SQL DDL. Make sure to define primary keys and foreign keys. Your SQL DDL must run on either MySQL or Microsoft SQL Server. (11 marks)**
+**2. Convert the UML diagram into SQL DDL. Make sure to define primary keys and foreign keys. Your SQL DDL must run on either MySQL or Microsoft SQL Server. Make sure your primary keys that are auto-increment are specified as `AUTO_INCREMENT` in your DDL. (11 marks)**
 
 **3. Imagine creating your own store and selling products. Determine what products to sell. Write a mission statement (1 mark) and executive summary paragraph (2 marks) describing your idea.**
 
