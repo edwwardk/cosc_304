@@ -21,7 +21,9 @@ paymentMethodid int not null auto_increment,
 paymentType varchar(20),
 paymentnumber int,
 paymentExpiryDate date,
-primary key (paymentMethodid)
+customerid int,
+primary key (paymentMethodid),
+foreign key (customerid) references Customer(customerid)
 ) ENGINE = Innodb;
 
 create table Customer(
@@ -50,32 +52,50 @@ shipToCity varchar(20),
 shipToState varchar(20),
 shipToCountry varchar(20),
 shipToPostalCode varchar(6),
-primary key (orderid)
+customerId int,
+primary key (orderid),
+foreign key (customerId) references Customer(customerId)
 );
 
 create table Shipment(
 shipmentid int not null auto_increment,
 shipmentDate date,
 shipmentDesc varchar(400),
-primary key (shipmentid)
+orderId int,
+wareHouseId int,
+primary key (shipmentid),
+foreign key (orderId) references OrderSummary(orderId),
+foreign key (wareHouseId) references Warehouse(wareHouseId)
 );
 
 create table Review(
 reviewid int auto_increment,
 reviewRating int,
 reviewComment varchar(400),
-reviewDate datetime, 
-primary key (reviewid)
+reviewDate datetime,
+customerId int,
+productId int,
+primary key (reviewid),
+foreign key (customerId) references Customer(customerId),
+foreign key (productId) references Product(productId)
 );
 
 create table InCart(
 inCartQuantity int,
 inCartPrice float
+customerId int,
+productId int,
+foreign key (customerId) references Customer(customerId),
+foreign key (productId) references Product(productId)
 );
 
 create table OrderProduct(
 orderProductQuantity int,
-orderProductPrice float
+orderProductPrice float,
+orderId int,
+productId int,
+foreign key (orderId) references OrderSummary(orderId),
+foreign key (productId) references Product(productId)
 );
 
 create table Warehouse(
@@ -97,9 +117,15 @@ productPrice float,
 productImageURL varchar(50),
 productImage blob, 
 productDesc varchar(400),
-primary key (productid)
+categoryId int,
+primary key (productid),
+foreign key (categoryId) references Category(categoryId)
 );
 
 create table ProductInventory(
-inventoryQuantity int 
+inventoryQuantity int,
+productid int,
+wareHouseId int,
+foreign key (productid) references Product(productId),
+foreign key (wareHouseId) references Warehouse(wareHouseId)
 );
