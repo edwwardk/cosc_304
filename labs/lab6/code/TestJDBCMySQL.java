@@ -4,7 +4,7 @@ public class TestJDBCMySQL {
     public static void main(String[] args) {
         String url = "jdbc:mysql://cosc304-db.hamster-chinstrap.ts.net/workson";
         String uid = "testuser";
-        String pw = "304testpw";              
+        String pw = "304testpw";
               
         try (Connection con = DriverManager.getConnection(url, uid, pw);
             Statement stmt = con.createStatement();) {
