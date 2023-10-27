@@ -134,7 +134,7 @@ public class EnrollJDBC
 	public Connection connect() throws SQLException
 	{
 	    // Fill in your connection information. Do NOT connect to university database (lab 2). Connect to testuser or mydb databases.
-		String url = "jdbc:mysql://cosc304-db.hamster-chinstrap.ts.net/workson";
+		String url = "jdbc:mysql://cosc304-db.hamster-chinstrap.ts.net/testuser";
         String uid = "testuser";
         String pw = "304testpw";
 
@@ -211,7 +211,17 @@ public class EnrollJDBC
         StringBuilder output = new StringBuilder();
        
     	// Use a PreparedStatement for this query.
-        // TODO: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string        
+        // TODO: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
+        
+        String listAllStudentsQuery = "
+        SELECT *
+        FROM 
+        WHERE 
+        GROUP BY 
+        HAVING 
+        ORDER BY 
+        LIMIT 
+        "
         
         return output.toString();
     }
