@@ -211,7 +211,7 @@ public class EnrollJDBC
         StringBuilder output = new StringBuilder();
        
     	// Use a PreparedStatement for this query.
-        // TODO: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
+        // TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
         
         String listAllStudentsQuery = "
         SELECT *
@@ -239,7 +239,7 @@ public class EnrollJDBC
     public String listDeptProfessors(String deptName) throws SQLException
     {
     	// Use a PreparedStatement for this query.
-    	// TODO: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
+    	// TODO daniel: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
     	return "";        
     }
     
@@ -256,7 +256,7 @@ public class EnrollJDBC
     public String listCourseStudents(String courseNum) throws SQLException
     {
     	// Use a PreparedStatement for this query.
-    	// TODO: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
+    	// TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
     	return "";        
     }
     
@@ -269,7 +269,7 @@ public class EnrollJDBC
      */
     public ResultSet computeGPA(String studentId) throws SQLException
     {
-    	 // TODO: Use a PreparedStatement
+    	 // TODO daniel: Use a PreparedStatement
     	return null;
     }
     
@@ -282,7 +282,7 @@ public class EnrollJDBC
      */
     public PreparedStatement addStudent(String studentId, String studentName, String sex, java.util.Date birthDate) throws SQLException
     {
-   	 	// TODO: Use a PreparedStatement and return it at the end of the method
+   	 	// TODO edward: Use a PreparedStatement and return it at the end of the method
     	return null;
     }
     
@@ -297,7 +297,7 @@ public class EnrollJDBC
      */
     public PreparedStatement deleteStudent(String studentId) throws SQLException
     {
-    	// TODO: Use a PreparedStatement and return it at the end of the method
+    	// TODO daniel: Use a PreparedStatement and return it at the end of the method
     	return null;
     }
     
@@ -312,7 +312,7 @@ public class EnrollJDBC
      */
     public PreparedStatement updateStudent(String studentId, String studentName, String sex, java.util.Date birthDate, double gpa) throws SQLException
     {
-    	// TODO: Use a PreparedStatement and return it at the end of the method
+    	// TODO edward: Use a PreparedStatement and return it at the end of the method
     	return null;
     }     
     
@@ -327,7 +327,7 @@ public class EnrollJDBC
      */    
     public PreparedStatement newEnroll(String studentId, String courseNum, String sectionNum, Double grade) throws SQLException
     {               
-    	// TODO: Use a PreparedStatement and return it at the end of the method
+    	// TODO daniel: Use a PreparedStatement and return it at the end of the method
     	return null;
     }
     
@@ -342,7 +342,7 @@ public class EnrollJDBC
      */    
     public PreparedStatement updateStudentGPA(String studentId) throws SQLException
     {               
-    	// TODO: Use a PreparedStatement and return it at the end of the method
+    	// TODO edward: Use a PreparedStatement and return it at the end of the method
     	return null;
     }	
     
@@ -357,7 +357,7 @@ public class EnrollJDBC
      */    
     public PreparedStatement removeStudentFromSection(String studentId, String courseNum, String sectionNum) throws SQLException
 	{
-    	// TODO: Use a PreparedStatement and return it at the end of the method
+    	// TODO daniel: Use a PreparedStatement and return it at the end of the method
     	return null;
 	}
 		
@@ -373,7 +373,7 @@ public class EnrollJDBC
      */    
     public PreparedStatement updateStudentMark(String studentId, String courseNum, String sectionNum, double grade) throws SQLException
 	{
-    	// TODO: Use a PreparedStatement and return it at the end of the method
+    	// TODO edward: Use a PreparedStatement and return it at the end of the method
     	return null;
 	}		
     
@@ -388,7 +388,7 @@ public class EnrollJDBC
     public ResultSet query1() throws SQLException
     {
         System.out.println("\nExecuting query #1.");
-        // TODO: Execute the SQL query and return a ResultSet.
+        // TODO daniel: Execute the SQL query and return a ResultSet.
         return null;       
     }
     
@@ -405,7 +405,7 @@ public class EnrollJDBC
     public ResultSet query2() throws SQLException
     {
         System.out.println("\nExecuting query #2.");
-        // TODO: Execute the SQL query and return a ResultSet.
+        // TODO edward: Execute the SQL query and return a ResultSet.
         return null;        
     }
     
@@ -424,7 +424,7 @@ public class EnrollJDBC
     public ResultSet query3() throws SQLException
     {
         System.out.println("\nExecuting query #3.");
-        // TODO: Execute the SQL query and return a ResultSet.
+        // TODO daniel: Execute the SQL query and return a ResultSet.
         return null;        
     }
     
@@ -441,7 +441,7 @@ public class EnrollJDBC
 	public ResultSet query4() throws SQLException
 	{
 		System.out.println("\nExecuting query #4.");
-		 // TODO: Execute the SQL query and return a ResultSet.
+		 // TODO edward: Execute the SQL query and return a ResultSet.
         return null;		
 	}
 	
