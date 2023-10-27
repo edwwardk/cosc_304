@@ -3,8 +3,8 @@ EnrollJDBC.java - JDBC program for accessing and updating an enrollment database
 
 Lab Assignment #6
 
-Student name: 	<your student name>
-University id:	<your university id>
+Student name: 	Edward Kneller, Daniel Holmes
+University id:	      59509406, 68152776
 */
 
 import java.io.File;
@@ -133,10 +133,10 @@ public class EnrollJDBC
 	 */
 	public Connection connect() throws SQLException
 	{
-	    // TODO: Fill in your connection information. Do NOT connect to university database (lab 2). Connect to testuser or mydb databases.
-		String url = "jdbc:mysql://localhost/testuser"; 
-		String uid = "testuser";                
-		String pw = "<your password>";
+	    // Fill in your connection information. Do NOT connect to university database (lab 2). Connect to testuser or mydb databases.
+		String url = "jdbc:mysql://cosc304-db.hamster-chinstrap.ts.net/workson";
+        String uid = "testuser";
+        String pw = "304testpw";
 
 		System.out.println("Connecting to database.");
 		// Note: Must assign connection to instance variable as well as returning it back to the caller
