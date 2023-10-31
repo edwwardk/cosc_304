@@ -212,7 +212,7 @@ public class EnrollJDBC
        
     	// Use a PreparedStatement for this query.
         // TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
-        
+        System.out.println("run listallstudents");
         String listAllStudentsQuery =  " SELECT * FROM  WHERE  GROUP BY  HAVING  ORDER BY  LIMIT  ";
         
         return output.toString();
@@ -232,7 +232,18 @@ public class EnrollJDBC
     {
     	// Use a PreparedStatement for this query.
     	// TODO daniel: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
-    	return "";        
+        String SQL = "SELECT * FROM prof WHERE dname = ?";
+         StringBuilder output = new StringBuilder();
+         PreparedStatement stmt = con.prepareStatement(SQL);
+          stmt.setString(1, "Mathematics");
+         ResultSet results = stmt.executeQuery();
+         while (results.next()){
+            String proffname = results.getString("pname");
+            String deptname = results.getString("dname");
+         output.append(proffname +", "+deptname + "\n");
+         }
+        
+    	return output.toString();        
     }
     
     /**
