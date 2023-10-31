@@ -29,7 +29,7 @@ public class EnrollJDBC
     /**
      * Path to DDL file for database. TODO: Change this as needed.
      */
-    private String databaseFileName = "bin/university.ddl";
+    private String databaseFileName = "C:\\Users\\12504\\Documents\\GitHub\\cosc_304\\labs\\lab6\\assignJava\\304_lab6\\university.ddl";
 
 	/**
 	 * Main method is only used for convenience.  Use JUnit test file to verify your answer.
@@ -213,15 +213,7 @@ public class EnrollJDBC
     	// Use a PreparedStatement for this query.
         // TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
         
-        String listAllStudentsQuery = "
-        SELECT *
-        FROM 
-        WHERE 
-        GROUP BY 
-        HAVING 
-        ORDER BY 
-        LIMIT 
-        "
+        String listAllStudentsQuery =  " SELECT * FROM  WHERE  GROUP BY  HAVING  ORDER BY  LIMIT  ";
         
         return output.toString();
     }
