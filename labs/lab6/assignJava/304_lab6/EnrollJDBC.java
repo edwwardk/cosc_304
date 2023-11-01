@@ -208,12 +208,23 @@ public class EnrollJDBC
 	 */
     public String listAllStudents() throws SQLException
     {                
-        StringBuilder output = new StringBuilder();
+       
        
     	// Use a PreparedStatement for this query.
         // TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
-        System.out.println("run listallstudents");
-        String listAllStudentsQuery =  " SELECT * FROM  WHERE  GROUP BY  HAVING  ORDER BY  LIMIT  ";
+         String SQL = "SELECT * FROM student";
+         StringBuilder output = new StringBuilder();
+         PreparedStatement stmt = con.prepareStatement(SQL);
+         ResultSet results = stmt.executeQuery();
+         while (results.next()){
+            String sid = results.getString("sid");
+            String sname = results.getString("sid");
+            String sex = results.getString("sex");
+            String Birthday = results.getString("birthdate");
+            Double gpa = results.getDouble("gpa");
+         output.append(sid +", "+sname+ ", "+ sex+ ", "+ Birthday + gpa+"\n");
+         }
+        
         
         return output.toString();
     }
@@ -235,7 +246,7 @@ public class EnrollJDBC
         String SQL = "SELECT * FROM prof WHERE dname = ?";
          StringBuilder output = new StringBuilder();
          PreparedStatement stmt = con.prepareStatement(SQL);
-          stmt.setString(1, "Mathematics");
+          stmt.setString(1, deptName);
          ResultSet results = stmt.executeQuery();
          while (results.next()){
             String proffname = results.getString("pname");
@@ -273,7 +284,14 @@ public class EnrollJDBC
     public ResultSet computeGPA(String studentId) throws SQLException
     {
     	 // TODO daniel: Use a PreparedStatement
-    	return null;
+         String SQL = "Select gpa FROM student WHERE sid = ? ";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+          stmt.setString(1, studentId);
+         ResultSet results = stmt.executeQuery();
+        // while (results.next()){
+        // System.out.println(results.getBigDecimal("gpa") );
+        // }
+    	return results ;
     }
     
     /**
@@ -301,7 +319,10 @@ public class EnrollJDBC
     public PreparedStatement deleteStudent(String studentId) throws SQLException
     {
     	// TODO daniel: Use a PreparedStatement and return it at the end of the method
-    	return null;
+         String SQL = "DELETE FROM student WHERE sid = ? ";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+          stmt.setString(1, studentId);
+    	return stmt;
     }
     
     /**
@@ -331,7 +352,13 @@ public class EnrollJDBC
     public PreparedStatement newEnroll(String studentId, String courseNum, String sectionNum, Double grade) throws SQLException
     {               
     	// TODO daniel: Use a PreparedStatement and return it at the end of the method
-    	return null;
+         String SQL = "INSERT INTO student Values(?,?,?,?)";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, studentId);
+        stmt.setString(  2,courseNum);
+        stmt.setString(  3,sectionNum);
+        stmt.setDouble(  4,grade);
+    	return stmt;
     }
     
     /**
@@ -361,7 +388,14 @@ public class EnrollJDBC
     public PreparedStatement removeStudentFromSection(String studentId, String courseNum, String sectionNum) throws SQLException
 	{
     	// TODO daniel: Use a PreparedStatement and return it at the end of the method
-    	return null;
+         String SQL = " DELETE FROM enroll WHERE sid = ? AND coursenum = ? AND sectionNum = ? ; UPDATE student SET gpa = AVG(SELECT gpa FROM enroll WHERE sid = ?)where sid = ?";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, studentId);
+        stmt.setString(2, courseNum);
+        stmt.setString(3, sectionNum);
+        stmt.setString(4, studentId);
+        stmt.setString(5, studentId);
+    	return stmt;
 	}
 		
 
