@@ -214,15 +214,16 @@ public class EnrollJDBC
         // TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
          String SQL = "SELECT * FROM student";
          StringBuilder output = new StringBuilder();
+         output.append("sid, sname, sex, birthdate, gpa");
          PreparedStatement stmt = con.prepareStatement(SQL);
          ResultSet results = stmt.executeQuery();
          while (results.next()) {
             String sid = results.getString("sid");
-            String sname = results.getString("sid");
+            String sname = results.getString("sname");
             String sex = results.getString("sex");
             String Birthday = results.getString("birthdate");
-            Double gpa = results.getDouble("gpa");
-         output.append(sid +", "+sname+ ", "+ sex+ ", "+ Birthday + gpa+"\n");
+            String gpa = results.getString("gpa");
+         output.append(String.format("\n%s, %s, %s, %s, %s", sid, sname, sex, Birthday, gpa));
          }
         
         return output.toString();
@@ -248,10 +249,11 @@ public class EnrollJDBC
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, deptName);
         ResultSet results = stmt.executeQuery();
+        output.append("Professor Name, Department Name");
         while (results.next()) {
             String proffname = results.getString("pname");
             String deptname = results.getString("dname");
-        output.append(proffname + ", "+ deptname + "\n");
+        output.append("\n" + proffname + ", "+ deptname);
         }
 
     	return output.toString();        
@@ -277,10 +279,13 @@ public class EnrollJDBC
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, courseNum);
         ResultSet results = stmt.executeQuery();
+        output.append("Student Id, Student Name, Course Number, Section Number");
         while (results.next()) {
-            String courseNumber = results.getString("cnum");
+            String studentId = results.getString("sid");
             String studentName = results.getString("sname");
-        output.append(courseNumber + ", "+ studentName + "\n");
+            String courseNumber = results.getString("cnum");
+            String sectionNumber = results.getString("secnum");
+        output.append(String.format("\n%s, %s, %s, %s", studentId, studentName, courseNumber, sectionNumber));
         }
 
     	return output.toString(); 
@@ -316,7 +321,15 @@ public class EnrollJDBC
     public PreparedStatement addStudent(String studentId, String studentName, String sex, java.util.Date birthDate) throws SQLException
     {
    	 	// TODO edward: Use a PreparedStatement and return it at the end of the method
-    	return null;
+    	String SQL = "INSERT INTO student VALUES (?,?,?,?,?)";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, studentId);
+        stmt.setString(2, studentName);
+        stmt.setString(3, sex);
+        stmt.setDate(4, new java.sql.Date(birthDate.getTime()));
+        stmt.setString(5, EnrollJDBC.resultSetToString(computeGPA(studentId), 100));
+
+    	return stmt;
     }
     
     /**
@@ -349,7 +362,15 @@ public class EnrollJDBC
     public PreparedStatement updateStudent(String studentId, String studentName, String sex, java.util.Date birthDate, double gpa) throws SQLException
     {
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
-    	return null;
+    	String SQL = "UPDATE student SET sname = ?, sex = ?, birthdate = ?, gpa = ? WHERE sid = ?";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, studentName);
+        stmt.setString(2, sex);
+        stmt.setDate(3, new java.sql.Date(birthDate.getTime()));
+        stmt.setDouble(4, gpa);
+        stmt.setString(5, studentId);
+
+    	return stmt;
     }     
     
     /**
@@ -385,7 +406,12 @@ public class EnrollJDBC
     public PreparedStatement updateStudentGPA(String studentId) throws SQLException
     {               
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
-    	return null;
+        String SQL = "UPDATE student SET gpa = AVG(SELECT gpa FROM enroll WHERE sid = ?)where sid = ?";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, studentId);
+        stmt.setString(2, studentId);
+
+    	return stmt;
     }	
     
     /**
