@@ -29,7 +29,9 @@ public class EnrollJDBC
     /**
      * Path to DDL file for database. TODO: Change this as needed.
      */
-    private String databaseFileName = "C:\\Users\\12504\\Documents\\GitHub\\cosc_304\\labs\\lab6\\assignJava\\304_lab6\\university.ddl";
+    // gets path relative to source file/class path
+    private String databaseFileName = new File("").getAbsolutePath().concat("\\assignJava\\304_lab6\\university.ddl");
+    //private String databaseFileName = "C:\\Users\\12504\\Documents\\GitHub\\cosc_304\\labs\\lab6\\assignJava\\304_lab6\\university.ddl";
 
 	/**
 	 * Main method is only used for convenience.  Use JUnit test file to verify your answer.
@@ -143,7 +145,7 @@ public class EnrollJDBC
 		con = DriverManager.getConnection(url, uid, pw);
 		return con;		                       
 	}
-	
+
 	/**
 	 * Closes connection to database.
 	 */
@@ -160,7 +162,7 @@ public class EnrollJDBC
 			System.out.println(e);
 		}
 	}
-		
+
 	/**
 	 * Creates the database and initializes the data.
 	 */
@@ -208,15 +210,13 @@ public class EnrollJDBC
 	 */
     public String listAllStudents() throws SQLException
     {                
-       
-       
     	// Use a PreparedStatement for this query.
         // TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
          String SQL = "SELECT * FROM student";
          StringBuilder output = new StringBuilder();
          PreparedStatement stmt = con.prepareStatement(SQL);
          ResultSet results = stmt.executeQuery();
-         while (results.next()){
+         while (results.next()) {
             String sid = results.getString("sid");
             String sname = results.getString("sid");
             String sex = results.getString("sex");
@@ -224,7 +224,6 @@ public class EnrollJDBC
             Double gpa = results.getDouble("gpa");
          output.append(sid +", "+sname+ ", "+ sex+ ", "+ Birthday + gpa+"\n");
          }
-        
         
         return output.toString();
     }
@@ -243,17 +242,18 @@ public class EnrollJDBC
     {
     	// Use a PreparedStatement for this query.
     	// TODO daniel: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
+
         String SQL = "SELECT * FROM prof WHERE dname = ?";
-         StringBuilder output = new StringBuilder();
-         PreparedStatement stmt = con.prepareStatement(SQL);
-          stmt.setString(1, deptName);
-         ResultSet results = stmt.executeQuery();
-         while (results.next()){
+        StringBuilder output = new StringBuilder();
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, deptName);
+        ResultSet results = stmt.executeQuery();
+        while (results.next()) {
             String proffname = results.getString("pname");
             String deptname = results.getString("dname");
-         output.append(proffname +", "+deptname + "\n");
-         }
-        
+        output.append(proffname + ", "+ deptname + "\n");
+        }
+
     	return output.toString();        
     }
     
@@ -271,7 +271,19 @@ public class EnrollJDBC
     {
     	// Use a PreparedStatement for this query.
     	// TODO edward: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
-    	return "";        
+
+    	String SQL = "SELECT * FROM course JOIN enroll ON course.cnum = enroll.cnum JOIN student ON enroll.sid = student.sid WHERE course.cnum = ? ";
+        StringBuilder output = new StringBuilder();
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setString(1, courseNum);
+        ResultSet results = stmt.executeQuery();
+        while (results.next()) {
+            String courseNumber = results.getString("cnum");
+            String studentName = results.getString("sname");
+        output.append(courseNumber + ", "+ studentName + "\n");
+        }
+
+    	return output.toString(); 
     }
     
     /**
