@@ -321,13 +321,13 @@ public class EnrollJDBC
     public PreparedStatement addStudent(String studentId, String studentName, String sex, java.util.Date birthDate) throws SQLException
     {
    	 	// TODO edward: Use a PreparedStatement and return it at the end of the method
-    	String SQL = "INSERT INTO student VALUES (?,?,?,?,?)";
+    	String SQL = "INSERT INTO student(sid, sname, sex, birthdate) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, studentId);
         stmt.setString(2, studentName);
         stmt.setString(3, sex);
         stmt.setDate(4, new java.sql.Date(birthDate.getTime()));
-        stmt.setString(5, EnrollJDBC.resultSetToString(computeGPA(studentId), 100));
+        stmt.executeUpdate();
 
     	return stmt;
     }
@@ -347,6 +347,7 @@ public class EnrollJDBC
          String SQL = "DELETE FROM student WHERE sid = ? ";
         PreparedStatement stmt = con.prepareStatement(SQL);
           stmt.setString(1, studentId);
+        stmt.executeUpdate();
     	return stmt;
     }
     
@@ -370,6 +371,7 @@ public class EnrollJDBC
         stmt.setDouble(4, gpa);
         stmt.setString(5, studentId);
 
+        stmt.executeUpdate();
     	return stmt;
     }     
     
@@ -391,6 +393,7 @@ public class EnrollJDBC
         stmt.setString(  2,courseNum);
         stmt.setString(  3,sectionNum);
         stmt.setDouble(  4,grade);
+        stmt.executeUpdate();
     	return stmt;
     }
     
@@ -411,6 +414,7 @@ public class EnrollJDBC
         stmt.setString(1, studentId);
         stmt.setString(2, studentId);
 
+        stmt.executeUpdate();
     	return stmt;
     }	
     
@@ -433,6 +437,7 @@ public class EnrollJDBC
         stmt.setString(3, sectionNum);
         stmt.setString(4, studentId);
         stmt.setString(5, studentId);
+        stmt.executeUpdate();
     	return stmt;
 	}
 		
@@ -449,6 +454,7 @@ public class EnrollJDBC
     public PreparedStatement updateStudentMark(String studentId, String courseNum, String sectionNum, double grade) throws SQLException
 	{
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
+        //stmt.executeUpdate();
     	return null;
 	}		
     
@@ -464,6 +470,7 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #1.");
         // TODO daniel: Execute the SQL query and return a ResultSet.
+        //stmt.executeUpdate();
         return null;       
     }
     
@@ -481,6 +488,7 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #2.");
         // TODO edward: Execute the SQL query and return a ResultSet.
+        //stmt.executeUpdate();
         return null;        
     }
     
@@ -500,6 +508,7 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #3.");
         // TODO daniel: Execute the SQL query and return a ResultSet.
+        //stmt.executeUpdate();
         return null;        
     }
     
@@ -516,7 +525,8 @@ public class EnrollJDBC
 	public ResultSet query4() throws SQLException
 	{
 		System.out.println("\nExecuting query #4.");
-		 // TODO edward: Execute the SQL query and return a ResultSet.
+		// TODO edward: Execute the SQL query and return a ResultSet.
+        //stmt.updateExecute();
         return null;		
 	}
 	
