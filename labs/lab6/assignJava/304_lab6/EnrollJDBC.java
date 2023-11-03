@@ -409,8 +409,9 @@ public class EnrollJDBC
     public PreparedStatement updateStudentGPA(String studentId) throws SQLException
     {               
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
-        String SQL = "UPDATE student SET gpa = AVG(SELECT gpa FROM enroll WHERE sid = ?)where sid = ?";
+        String SQL = "UPDATE student SET gpa = ? WHERE sid = ?";
         PreparedStatement stmt = con.prepareStatement(SQL);
+        
         stmt.setString(1, studentId);
         stmt.setString(2, studentId);
 
