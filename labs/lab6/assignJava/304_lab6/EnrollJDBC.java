@@ -8,6 +8,7 @@ University id:	      59509406, 68152776
 */
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -108,7 +109,7 @@ public class EnrollJDBC
         // Update student GPA
         app.init();
         System.out.println("\nTest update student GPA for student:\n"); 
-        app.newEnroll("98123434", "COSC 304", "001", 3.97);        
+        app.newEnroll("98123434", "COSC 304", "001", 3.97);
         app.updateStudentGPA("98123434");
         
         // Remove student from section
@@ -305,7 +306,7 @@ public class EnrollJDBC
         PreparedStatement stmt = con.prepareStatement(SQL);
           stmt.setString(1, studentId);
          ResultSet results = stmt.executeQuery();
-        // while (results.next()){
+        // while (results.next()) {
         // System.out.println(results.getBigDecimal("gpa") );
         // }
     	return results ;
@@ -367,7 +368,13 @@ public class EnrollJDBC
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, studentName);
         stmt.setString(2, sex);
-        stmt.setDate(3, new java.sql.Date(birthDate.getTime()));
+        try {   
+            stmt.setDate(3, new java.sql.Date(birthDate.getTime()));
+        } catch (java.lang.NullPointerException e) {
+            //throw new SQLException("Birthdate cannot be null");
+            System.out.println("testing updateStudent()");
+            stmt.setNull(3, 91);
+        }
         stmt.setDouble(4, gpa);
         stmt.setString(5, studentId);
 
@@ -387,12 +394,18 @@ public class EnrollJDBC
     public PreparedStatement newEnroll(String studentId, String courseNum, String sectionNum, Double grade) throws SQLException
     {               
     	// TODO daniel: Use a PreparedStatement and return it at the end of the method
-         String SQL = "INSERT INTO student Values(?,?,?,?)";
+         String SQL = "INSERT INTO enroll (sid, cnum, secnum, grade) Values (?, ?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, studentId);
-        stmt.setString(  2,courseNum);
-        stmt.setString(  3,sectionNum);
-        stmt.setDouble(  4,grade);
+        stmt.setString(  2, courseNum);
+        stmt.setString(  3, sectionNum);
+        if (grade != null) {
+            stmt.setDouble(4, grade);
+            
+        } else {
+
+            stmt.setNull(4, 8);
+        }
         stmt.executeUpdate();
     	return stmt;
     }
@@ -407,13 +420,18 @@ public class EnrollJDBC
      * 		PreparedStatement used for command 
      */    
     public PreparedStatement updateStudentGPA(String studentId) throws SQLException
-    {               
+    {
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
+        ResultSet gpa = computeGPA(studentId);
+        double gpaDouble = 0;
+        if (gpa.next()) {
+            gpaDouble = gpa.getDouble("gpa");
+        }
+        
         String SQL = "UPDATE student SET gpa = ? WHERE sid = ?";
         PreparedStatement stmt = con.prepareStatement(SQL);
-        
-        stmt.setString(1, studentId);
-        stmt.setString(2, studentId);
+        stmt.setDouble(1, 3);
+        stmt.setDouble(2, gpaDouble);
 
         stmt.executeUpdate();
     	return stmt;
@@ -431,17 +449,16 @@ public class EnrollJDBC
     public PreparedStatement removeStudentFromSection(String studentId, String courseNum, String sectionNum) throws SQLException
 	{
     	// TODO daniel: Use a PreparedStatement and return it at the end of the method
-         String SQL = " DELETE FROM enroll WHERE sid = ? AND coursenum = ? AND sectionNum = ? ; UPDATE student SET gpa = AVG(SELECT gpa FROM enroll WHERE sid = ?)where sid = ?";
+         String SQL = "DELETE FROM enroll WHERE sid = ? AND cnum = ? AND secnum = ?";
         PreparedStatement stmt = con.prepareStatement(SQL);
         stmt.setString(1, studentId);
         stmt.setString(2, courseNum);
         stmt.setString(3, sectionNum);
-        stmt.setString(4, studentId);
-        stmt.setString(5, studentId);
         stmt.executeUpdate();
+        updateStudentGPA(studentId);
     	return stmt;
 	}
-		
+    
 
     /**
      * Updates a student's mark in an enrolled course section and updates their grade.
@@ -455,8 +472,13 @@ public class EnrollJDBC
     public PreparedStatement updateStudentMark(String studentId, String courseNum, String sectionNum, double grade) throws SQLException
 	{
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
-        //stmt.executeUpdate();
-    	return null;
+        String SQL = "UPDATE enroll SET grade = ? WHERE sid = ?";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        stmt.setDouble(1, grade);
+        stmt.setString(2, studentId);
+
+        stmt.executeUpdate();
+    	return stmt;
 	}		
     
     /**
@@ -471,8 +493,10 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #1.");
         // TODO daniel: Execute the SQL query and return a ResultSet.
-        //stmt.executeUpdate();
-        return null;       
+        String SQL = "SELECT sid, sname FROM student WHERE sid NOT IN (SELECT sid FROM enroll);";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet results = stmt.executeQuery(); 
+        return results;    
     }
     
     /**
@@ -489,8 +513,10 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #2.");
         // TODO edward: Execute the SQL query and return a ResultSet.
-        //stmt.executeUpdate();
-        return null;        
+        String SQL = "SELECT enroll.sid, sname, count(cnum) as numcourses, sum(grade)/count(grade) as gpa FROM enroll JOIN student ON enroll.sid = student.sid GROUP BY enroll.sid, birthdate HAVING (numcourses = 0 OR gpa > 3.1) AND birthdate > '1992-03-15' ORDER BY gpa DESC, sname ASC LIMIT 5";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet results = stmt.executeQuery();
+        return results;
     }
     
     /**
@@ -527,8 +553,10 @@ public class EnrollJDBC
 	{
 		System.out.println("\nExecuting query #4.");
 		// TODO edward: Execute the SQL query and return a ResultSet.
-        //stmt.updateExecute();
-        return null;		
+        String SQL = "SELECT enroll.sid, sname, count(grade > average) as numhigher FROM enroll JOIN (SELECT cnum, secnum, sum(grade)/count(grade) as average FROM enroll GROUP BY cnum, secnum) as averages ON enroll.cnum = averages.cnum AND enroll.secnum = averages.secnum JOIN student ON enroll.sid = student.sid WHERE grade > average GROUP BY enroll.sid, sname HAVING numhigher > 1 ORDER BY numhigher DESC LIMIT 5";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet results = stmt.executeQuery();
+        return results;		
 	}
 	
 	/*
