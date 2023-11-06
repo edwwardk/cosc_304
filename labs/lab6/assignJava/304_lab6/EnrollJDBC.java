@@ -512,7 +512,7 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #2.");
         // TODO edward: Execute the SQL query and return a ResultSet..sid
-        String SQL = "SELECT student.sid, sname, count(cnum) as numcourses, avg(grade) as gpa FROM enroll RIGHT JOIN student ON enroll = student.sid GROUP BY student.sid, student.sname, birthdate HAVING (numcourses = 0 OR gpa > 3.1) AND birthdate > DATE('1992-03-15') ORDER BY gpa DESC, sname ASC LIMIT 5";
+        String SQL = "SELECT student.sid, sname, count(cnum) as numcourses, avg(grade) as gpa FROM enroll RIGHT JOIN student ON enroll.sid = student.sid GROUP BY student.sid, student.sname, birthdate HAVING (numcourses = 0 OR gpa > 3.1) AND birthdate > DATE('1992-03-15') ORDER BY gpa DESC, sname ASC LIMIT 5";
         PreparedStatement stmt = con.prepareStatement(SQL);
         ResultSet results = stmt.executeQuery();
         return results;
