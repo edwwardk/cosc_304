@@ -8,7 +8,7 @@ The web store that we are going to build allows customers to enter their informa
 
 1. To get started with this assignment, download the [starter project code files](304_lab7_starter_node.zip) and follow the [setup instructions](setup/) to create your development environment.
 
-2. Create the tables and load the sample data into your SQL Server database.  The file `/routes/loaddata.js` will load the database using the `/data/data.ddl` script. You can run this file from the command line or by using the URL: `http://127.0.0.1/loaddata`.
+2. Create the tables and load the sample data into your SQL Server database.  The file `/routes/loaddata.js` will load the database using the `/ddl/SQLServer_orderdb.ddl` script. You can run this file from the command line or by using the URL: `http://127.0.0.1/loaddata`.
 
 ## Databases and Autonumber Fields
 
@@ -36,7 +36,7 @@ Modify the `/routes/listorder.js` file so that it lists all orders currently in 
 
 #### Details:
 
-1. [Sample output](http://cosc304.ok.ubc.ca/rlawrenc/lab7_node/listorder.js)
+1. [Sample output](https://cosc304.ok.ubc.ca/rlawrenc/tomcat/Lab7/listorder.jsp)
 
 2. The main shop page is `server.js`. Feel free to change it to your shop name and style!
 
@@ -64,7 +64,7 @@ Build a simple web site that allows users to search for products by name, put pr
 - **/routes/checkout.js** - page to start the checkout.  No changes needed.
 - **/routes/order.js** - store a checked-out order to database. **TODO: fill-in your own code (20 marks)**
 
-2. Take a look at the sample web site available at [http://cosc304.ok.ubc.ca/rlawrenc/lab7_php/shop.html](http://cosc304.ok.ubc.ca/rlawrenc/lab7_node/shop.html).
+2. Take a look at the sample web site available at [https://cosc304.ok.ubc.ca/rlawrenc/tomcat/Lab7/shop.html](https://cosc304.ok.ubc.ca/rlawrenc/tomcat/Lab7/shop.html).
 
 3. Start by editing the Js file called `listprod.js`.  This file is called from `server.js` when the user begins to shop.  The file allows a customer to search for products by name.  If a customer enters "ab", then the query should be: `productName LIKE '%ab%'`.
 

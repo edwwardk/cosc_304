@@ -1,6 +1,6 @@
 # COSC 304 - Introduction to Database Systems<br>Assignment 7 - Building a Database-enabled Web Site using JSP
 
-This assignment practices web development using a commercial database system, [Microsoft SQL Server](https://www.microsoft.com/en-ca/sql-server)</a>. SQL Server supports most of the SQL standard including foreign keys and triggers.  **The assignment is done in your project groups of 4 people.**</p>
+This assignment practices web development using a commercial database system, [Microsoft SQL Server](https://www.microsoft.com/en-ca/sql-server)</a>. SQL Server supports most of the SQL standard including foreign keys and triggers.</p>
 
 The web store that we are going to build allows customers to enter their information, chose products by putting them into a shopping cart, and then place an order.
 
@@ -11,7 +11,7 @@ The web store that we are going to build allows customers to enter their informa
 
 2. Setup your local development environment ([instructions](setup/)). 
 
-3. Create the tables and load the sample data into your SQL Server database.  The file `WebContent/loaddata.jsp` will load the database using the `WebContent/orderdb_sql.ddl` script. You can run this file by using the URL: `http://localhost/shop/loaddata.jsp`.
+3. Create the tables and load the sample data into your SQL Server database.  The file `WebContent/loaddata.jsp` will load the database using the `WebContent/ddl/SQLServer_orderdb.ddl` script. You can run this file by using the URL: `http://localhost/shop/loaddata.jsp`.
 
 4. **SQL Server is not supported on the Apple M1 chip.** However, there is an alternate version that is. In the `docker-compose.yml` file, change:
 `image: mcr.microsoft.com/mssql/server:2019-latest` to this: `image: mcr.microsoft.com/azure-sql-edge` .
@@ -124,6 +124,6 @@ Up to 10 bonus marks can be received by going beyond the basic assignment requir
 
 #### Deliverables:
 
-1. Option #1: Demonstrate your working site to the TA and get +2 bonus marks. No submission on Canvas is required.
+1. Option #1: Demonstrate your working site to the TA and get +4 bonus marks. No submission on Canvas is required.
 2. Option #2: Submit in a single zip file all your source code using Canvas. This can be done by exporting your project. Submit all your files, but the files you must change are: `listprod.jsp`, `listorder.jsp` and `order.jsp`.
 3. Only one submission for all members of the group. Put all partner's names and student numbers on the submission.
