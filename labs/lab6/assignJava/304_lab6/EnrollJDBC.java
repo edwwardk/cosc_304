@@ -534,8 +534,10 @@ public class EnrollJDBC
     {
         System.out.println("\nExecuting query #3.");
         // TODO daniel: Execute the SQL query and return a ResultSet.
-        //stmt.executeUpdate();
-        return null;        
+        String SQL = "WITH courseinfo AS (SELECT course.cnum AS cnum, course.dname AS dept, COUNT(DISTINCT section.secnum) AS numsections, COUNT(enroll.sid) AS numstudents, AVG(enroll.grade) AS avggrade, COUNT(DISTINCT section.pname) AS numprofs FROM course LEFT JOIN section  ON course.cnum = section.cnum LEFT JOIN enroll  ON section.cnum = enroll.cnum AND section.secnum = enroll.secnum WHERE course.dname  = 'Chemistry' or course.dname  = 'Computer Science' GROUP BY course.cnum, course.dname HAVING numprofs != 0 ) SELECT cnum,numsections,numstudents,avggrade,numprofs FROM courseinfo ORDER BY cnum  ASC, numprofs ASC";
+        PreparedStatement stmt = con.prepareStatement(SQL);
+        ResultSet results = stmt.executeQuery();
+        return results;	 
     }
     
 	/**
