@@ -302,14 +302,15 @@ public class EnrollJDBC
     public ResultSet computeGPA(String studentId) throws SQLException
     {
     	 // TODO daniel: Use a PreparedStatement
-         String SQL = "Select gpa FROM student WHERE sid = ? ";
+        String SQL = "SELECT avg(grade) as gpa FROM enroll WHERE sid = ? ";
         PreparedStatement stmt = con.prepareStatement(SQL);
-          stmt.setString(1, studentId);
-         ResultSet results = stmt.executeQuery();
+        stmt.setString(1, studentId);
+        ResultSet results = stmt.executeQuery();
+        // DO NOT RUN THIS IN computeGPA() or it will break everything
         // while (results.next()) {
         // System.out.println(results.getBigDecimal("gpa") );
         // }
-    	return results ;
+    	return results;
     }
     
     /**
@@ -401,9 +402,7 @@ public class EnrollJDBC
         stmt.setString(  3, sectionNum);
         if (grade != null) {
             stmt.setDouble(4, grade);
-            
         } else {
-
             stmt.setNull(4, 8);
         }
         stmt.executeUpdate();
@@ -423,15 +422,15 @@ public class EnrollJDBC
     {
     	// TODO edward: Use a PreparedStatement and return it at the end of the method
         ResultSet gpa = computeGPA(studentId);
-        double gpaDouble = 0;
-        if (gpa.next()) {
-            gpaDouble = gpa.getDouble("gpa");
+        BigDecimal gpaBigDecimal = BigDecimal.valueOf(0);
+        while (gpa.next()) {
+            gpaBigDecimal = gpa.getBigDecimal("gpa");
         }
         
         String SQL = "UPDATE student SET gpa = ? WHERE sid = ?";
         PreparedStatement stmt = con.prepareStatement(SQL);
-        stmt.setDouble(1, 3);
-        stmt.setDouble(2, gpaDouble);
+        stmt.setDouble(1, gpaBigDecimal.doubleValue());
+        stmt.setString(2, studentId);
 
         stmt.executeUpdate();
     	return stmt;
@@ -512,8 +511,8 @@ public class EnrollJDBC
     public ResultSet query2() throws SQLException
     {
         System.out.println("\nExecuting query #2.");
-        // TODO edward: Execute the SQL query and return a ResultSet.
-        String SQL = "SELECT enroll.sid, sname, count(cnum) as numcourses, sum(grade)/count(grade) as gpa FROM enroll JOIN student ON enroll.sid = student.sid GROUP BY enroll.sid, birthdate HAVING (numcourses = 0 OR gpa > 3.1) AND birthdate > '1992-03-15' ORDER BY gpa DESC, sname ASC LIMIT 5";
+        // TODO edward: Execute the SQL query and return a ResultSet..sid
+        String SQL = "SELECT student.sid, sname, count(cnum) as numcourses, avg(grade) as gpa FROM enroll RIGHT JOIN student ON enroll = student.sid GROUP BY student.sid, student.sname, birthdate HAVING (numcourses = 0 OR gpa > 3.1) AND birthdate > DATE('1992-03-15') ORDER BY gpa DESC, sname ASC LIMIT 5";
         PreparedStatement stmt = con.prepareStatement(SQL);
         ResultSet results = stmt.executeQuery();
         return results;
