@@ -1,0 +1,5 @@
+SELECT TOP 7 orderproduct.productId, productName, sum(price*quantity) totalRevenue
+FROM	orderproduct LEFT JOIN product ON orderproduct.productid = product.productid
+GROUP BY orderproduct.productid, productName
+HAVING sum(quantity) > 60
+ORDER BY totalRevenue ASC

@@ -1,0 +1,4 @@
+SELECT TOP 5 customer.customerId, firstName, lastName, city, state, sum(totalAmount) as totalOrderAmount
+FROM customer JOIN orderSummary ON customer.customerId = orderSummary.customerId
+GROUP BY customer.customerId, firstName, lastName, city, state
+ORDER BY totalOrderAmount DESC

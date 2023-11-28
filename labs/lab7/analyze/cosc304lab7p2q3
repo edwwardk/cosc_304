@@ -1,0 +1,7 @@
+SELECT product.categoryid, categoryname, sum(quantity*price) as totalAmount
+FROM orderproduct
+	JOIN product ON orderproduct.productid = product.productid
+	JOIN category ON product.categoryid = category.categoryid
+	JOIN ordersummary ON orderproduct.orderid = ordersummary.orderid
+WHERE YEAR(orderdate) = 2022
+GROUP BY product.categoryId, categoryname

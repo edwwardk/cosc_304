@@ -1,0 +1,3 @@
+SELECT YEAR(reviewDate), count(reviewId) as numRatings, avg(CAST(reviewRating AS DECIMAL(4,2))) as avgRating
+FROM review
+GROUP BY YEAR(reviewDate)

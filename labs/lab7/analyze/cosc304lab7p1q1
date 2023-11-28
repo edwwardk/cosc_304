@@ -1,0 +1,3 @@
+SELECT TOP 10 productId, productName, productPrice
+FROM product
+ORDER BY productPrice ASC

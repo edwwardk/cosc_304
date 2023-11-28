@@ -1,0 +1,4 @@
+SELECT *
+FROM orderproduct
+	JOIN product ON orderproduct.productid = product.productid
+	JOIN category ON product.categoryid = category.categoryid

@@ -1,0 +1,7 @@
+SELECT TOP 10 orderproduct.productId, productName, sum(quantity) as totalQuantity
+FROM orderproduct
+	JOIN ordersummary ON orderproduct.orderid = ordersummary.orderid
+	JOIN product ON orderproduct.productid = product.productid
+WHERE YEAR(orderDate) = 2023
+GROUP BY orderproduct.productId, productName
+ORDER BY sum(quantity) DESC

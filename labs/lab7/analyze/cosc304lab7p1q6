@@ -1,0 +1,12 @@
+SELECT YEAR(orderDate), paymentType, sum(totalAmount) as totalPaymentAmount
+FROM (
+		SELECT ordersummary.customerid, min(paymentMethodId) as lowestMethodId
+		FROM ordersummary
+		JOIN paymentmethod ON ordersummary.customerid = paymentmethod.customerid
+		GROUP BY ordersummary.customerid
+	) as singlePaymentMethods
+	JOIN paymentmethod ON singlePaymentMethods.lowestMethodId = paymentmethod.paymentMethodId
+	JOIN ordersummary ON paymentmethod.customerid = ordersummary.customerid
+WHERE YEAR(orderDate) > 2019
+GROUP BY YEAR(orderDate), paymentType
+ORDER BY YEAR(orderDate) ASC, totalPaymentAmount DESC
